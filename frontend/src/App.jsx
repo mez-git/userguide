@@ -7,29 +7,37 @@ function App() {
   const [steps, setSteps] = useState([
     {
       title: "Step-1 :Copy the below written Url ",
-      urlSnippet: "http://kuchhkuch/.com",
+      url: "http://kuchhkuch/.com",
       isCopied: false,
     },
     {
       title:
         "Step-2 :Now sit somewhere in quite and self introspect why are you doing this?",
-      urlSnippet: "",
+      url: "",
       isCopied: false,
     },
     {
       title:
         "Step-3 :Ahh leave anywhy it does not matter let just watch youtube",
-      urlSnippet: "http://yt/.com",
+      url: "http://yt/.com",
       isCopied: false,
     },
   ]);
+  
   const copyHandler = (index) => {
-    setSteps((prev) => {
-      return prev.map((step, id) =>
-        id === index ? { ...step, isCopied: !step.isCopied } : step
+    setSteps((prev) =>
+      prev.map((step, id) =>
+        id === index ? { ...step, isCopied: true } : step
+      )
+    );
+
+    setTimeout(() => {
+      setSteps((prev) =>
+        prev.map((step) => ({ ...step, isCopied: false }))
       );
-    });
+    }, 2000); 
   };
+
 
   return (
     <>
@@ -44,9 +52,9 @@ function App() {
                   <div className="flex items-start"> {step.title}</div>
 
                   <div>
-                    {step.urlSnippet && (
+                    {step.url && (
                       <div className="flex rounded-lg bg-gray-200 w-full p-4">
-                        <div className="flex flex-1">{step.urlSnippet}</div>
+                        <div className="flex flex-1">{step.url}</div>
                         <div
                           className="flex items-center"
                           onClick={() => copyHandler(index)}
