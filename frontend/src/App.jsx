@@ -1,22 +1,22 @@
 import { useState } from "react";
 import { FaCopy } from "react-icons/fa";
-import { Button } from "./components/ui/button";
+
 import "./App.css";
 
 function App() {
   const [steps, setSteps] = useState([
-    {
+    { id:1,
       title: "Step-1 :Copy the below written Url ",
       url: "http://kuchhkuch/.com",
       isCopied: false,
     },
-    {
+    {  id:2,
       title:
         "Step-2 :Now sit somewhere in quite and self introspect why are you doing this?",
       url: "",
       isCopied: false,
     },
-    {
+    { id:3,
       title:
         "Step-3 :Ahh leave anywhy it does not matter let just watch youtube",
       url: "http://yt/.com",
@@ -24,10 +24,10 @@ function App() {
     },
   ]);
   
-  const copyHandler = (index) => {
+  const copyHandler = (id) => {
     setSteps((prev) =>
-      prev.map((step, id) =>
-        id === index ? { ...step, isCopied: true } : step
+      prev.map((step) =>
+        id === step.id ? { ...step, isCopied: true } : step
       )
     );
 
@@ -47,7 +47,7 @@ function App() {
         <div>
           <ul>
             {steps.map((step, index) => (
-              <li key={index}>
+              <li key={step.id}>
                 <div className="flex flex-col gap-3">
                   <div className="flex items-start"> {step.title}</div>
 
@@ -57,7 +57,7 @@ function App() {
                         <div className="flex flex-1">{step.url}</div>
                         <div
                           className="flex items-center"
-                          onClick={() => copyHandler(index)}
+                          onClick={() => copyHandler(step.id)}
                         >
                           {step.isCopied && (
                             <div className="ml-2 px-2 py-1 text-xs rounded-full bg-black text-white">
