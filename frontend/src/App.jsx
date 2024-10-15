@@ -25,6 +25,9 @@ function App() {
   ]);
   
   const copyHandler = (id) => {
+    const thatStep=steps.find((step)=>step.id===id)
+    const url=thatStep.url
+    navigator.clipboard.writeText(url)
     setSteps((prev) =>
       prev.map((step) =>
         id === step.id ? { ...step, isCopied: true } : step
@@ -33,8 +36,11 @@ function App() {
 
     setTimeout(() => {
       setSteps((prev) =>
-        prev.map((step) => ({ ...step, isCopied: false }))
+        prev.map((step) =>
+          id === step.id ? { ...step, isCopied: false } : step
+        )
       );
+  
     }, 2000); 
   };
 
